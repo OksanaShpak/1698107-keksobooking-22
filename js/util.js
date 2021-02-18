@@ -1,4 +1,4 @@
-export {result, generateRandomNumber, getRandomArray} from './util.js';
+export {result, generateRandomNumber, getRandomArray};
 
 const result = new Array(counter);
   for (let index = 0; index < result.length; index++) {

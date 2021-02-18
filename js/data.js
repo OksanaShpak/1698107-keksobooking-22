@@ -1,4 +1,4 @@
-export {getOrder} from './data.js';
+export {getOrder};
 
 function getOrder(counter = 10) {
   const userAvatar = 8;
