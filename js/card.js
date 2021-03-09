@@ -1,9 +1,3 @@
-function escape(str) {
-  const s = document.createElement('div');
-  s.innerText = str;
-  return s.innerHTML;
-}
-
 export default function generateHTMLCard(card) {
   const types = {
     flat: 'Квартира',
@@ -11,7 +5,10 @@ export default function generateHTMLCard(card) {
     house: 'Дом',
     palace: 'Дворец',
   }
-  const {autor, offer} = card;
+  const {
+    autor,
+    offer,
+  } = card;
 
   const tmpl = document.getElementById('card').content.querySelector('.popup').cloneNode(true);
   tmpl.querySelector('img.popup__avatar').setAttribute('src', autor.avatar);
@@ -28,28 +25,66 @@ export default function generateHTMLCard(card) {
     return `<img src="${photoSrc}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`
   }).join('');
 
-
-
-
   return tmpl;
-
-
-  // return `
-  //   <article class="popup">
-  //     <img src="${autor.avatar}" class="popup__avatar" width="70" height="70" alt="Аватар пользователя">
-  //     <h3 class="popup__title">${escape(offer.title)}</h3>
-  //     <p class="popup__text popup__text--address">${+offer.address.x}; ${+offer.address.y}</p>
-  //     <p class="popup__text popup__text--price">${offer.price}<span>₽/ночь</span></p>
-  //     <h4 class="popup__type">${types[offer.type]}</h4>
-  //     <p class="popup__text popup__text--capacity">${offer.rooms} комнаты для ${offer.guests} гостей</p>
-  //     <p class="popup__text popup__text--time">Заезд после ${offer.checkin}, выезд до ${offer.checkout}</p>
-  //     <ul class="popup__features">
-  //       ${offer.features.map(function (feature) {return `<li class="popup__feature popup__feature--${feature}"></li>`}).join('')}
-  //     </ul>
-  //     <p class="popup__description">${offer.description}</p>
-  //     <div class="popup__photos">
-  //       ${offer.photos.map(function (photoSrc) {return `<img src="${photoSrc}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`}).join('')}
-  //     </div>
-  //    </article>
-  // `
 }
+
+// Validation
+
+// for title
+const titleInput = document.getElementById('title');
+titleInput.addEventListener('input', () => {
+  const valueLength = titleInput.value.length;
+  console.log(valueLength);
+  if (titleInput.validity.tooShort) {
+    titleInput.setCustomValidity('Ещё ' + (titleInput.getAttribute('minlength') - valueLength) + ' симв.');
+  } else if (titleInput.validity.tooLong) {
+    titleInput.setCustomValidity('Удалите лишние ' + (valueLength - titleInput.getAttribute('maxlength')) + ' симв.');
+  } else {
+    titleInput.setCustomValidity('');
+  }
+  titleInput.reportValidity();
+});
+
+
+
+
+
+
+// Validation
+// const titleInput = document.getElementById('title');
+// titleInput.addEventListener('invalid', () => {
+//   if (titleInput.validity.tooShort) {
+//     titleInput.setCustomValidity('Заголовок должен состоять минимум из 30-ти символов');
+//   } else if (titleInput.validity.tooLong) {
+//     titleInput.setCustomValidity('Заголовок не должен превышать 100-а символов');
+//   } else if (titleInput.validity.valueMissing) {
+//     titleInput.setCustomValidity('Обязательное поле');
+//   } else {
+//     titleInput.setCustomValidity('');
+//   }
+// });
+
+
+
+// function escape(str) {
+//   const s = document.createElement('div');
+//   s.innerText = str;
+//   return s.innerHTML;
+// }
+// return `
+//   <article class="popup">
+//     <img src="${autor.avatar}" class="popup__avatar" width="70" height="70" alt="Аватар пользователя">
+//     <h3 class="popup__title">${escape(offer.title)}</h3>
+//     <p class="popup__text popup__text--address">${+offer.address.x}; ${+offer.address.y}</p>
+//     <p class="popup__text popup__text--price">${offer.price}<span>₽/ночь</span></p>
+//     <h4 class="popup__type">${types[offer.type]}</h4>
+//     <p class="popup__text popup__text--capacity">${offer.rooms} комнаты для ${offer.guests} гостей</p>
+//     <p class="popup__text popup__text--time">Заезд после ${offer.checkin}, выезд до ${offer.checkout}</p>
+//     <ul class="popup__features">
+//       ${offer.features.map(function (feature) {return `<li class="popup__feature popup__feature--${feature}"></li>`}).join('')}
+//     </ul>
+//     <p class="popup__description">${offer.description}</p>
+//     <div class="popup__photos">
+//       ${offer.photos.map(function (photoSrc) {return `<img src="${photoSrc}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`}).join('')}
+//     </div>
+//    </article>

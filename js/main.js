@@ -4,6 +4,7 @@ import generateHTMLCard from './card.js';
 import form from './form.js';
 import disableForm from './disableForm.js';
 import leafletMap from './leafletMap.js';
+import validation from './validation';
 
 const cards = generateCard(getOrder());
 const wrapperCards = document.querySelector('.map__canvas');
@@ -16,6 +17,8 @@ leafletMap(
   generateHTMLCard,
 );
 
+form(getOrder());
+validation();
 
 // for (const card of cards) {
 //   wrapperCards.insertAdjacentHTML('beforeend', generateHTMLCard(card));
@@ -24,6 +27,3 @@ leafletMap(
 // for (const card of cards) {
 // }
 // wrapperCards.appendChild(generateHTMLCard(cards[0]));
-
-
-form(getOrder());
