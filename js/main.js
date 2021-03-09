@@ -4,10 +4,9 @@ import generateHTMLCard from './card.js';
 import form from './form.js';
 import disableForm from './disableForm.js';
 import leafletMap from './leafletMap.js';
+import validation from './validation.js'
 
 const cards = generateCard(getOrder());
-const wrapperCards = document.querySelector('.map__canvas');
-
 const formControls = disableForm();
 formControls.disable();
 leafletMap(
@@ -27,3 +26,4 @@ leafletMap(
 
 
 form(getOrder());
+validation();
