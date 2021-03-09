@@ -1,5 +1,4 @@
 export default function leafletMap(enableForm, cards, createPopupCard) {
-
   const map = L.map('map-canvas')
     .on('load', () => {
       enableForm();
@@ -49,9 +48,10 @@ export default function leafletMap(enableForm, cards, createPopupCard) {
       iconSize: [40, 40],
       iconAnchor: [20, 40],
     });
+
     const marker = L.marker({
-      lat: card.location.x,
-      lng: card.location.y,
+      lat: card.location.lat,
+      lng: card.location.lng,
     }, {
       icon,
     }, );

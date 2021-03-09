@@ -11,12 +11,16 @@ export default function generateHTMLCard(card) {
     house: 'Дом',
     palace: 'Дворец',
   }
-  const {autor, offer} = card;
+  const {
+    author,
+    offer
+  } = card;
+  console.log(card);
 
   const tmpl = document.getElementById('card').content.querySelector('.popup').cloneNode(true);
-  tmpl.querySelector('img.popup__avatar').setAttribute('src', autor.avatar);
+  tmpl.querySelector('img.popup__avatar').setAttribute('src', author.avatar);
   tmpl.querySelector('.popup__title').innerText = offer.title;
-  tmpl.querySelector('.popup__text--address').innerText = offer.address.x + ' ' + offer.address.y;
+  tmpl.querySelector('.popup__text--address').innerText = offer.address;
   tmpl.querySelector('.popup__text--price').innerHTML = `${offer.price} <span>₽/ночь</span>`;
   tmpl.querySelector('.popup__type').innerText = types[offer.type];
   tmpl.querySelector('.popup__text--capacity').innerHTML = `${offer.rooms} комнаты для ${offer.guests} гостей`;
